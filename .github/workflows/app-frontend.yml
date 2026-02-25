@@ -54,8 +54,8 @@ jobs:
                   script: |
                       docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
                       docker pull ${{ secrets.DOCKER_USERNAME }}/devload-app-frontend:latest
-                      docker stop devload-app-frontend || true
-                      docker rm devload-app-frontend || true
+                      docker stop appdevload || true
+                      docker rm appdevload || true
                       docker run -d --name appdevload \
                       --restart always \
                       -p 127.0.0.1:3001:80 \
