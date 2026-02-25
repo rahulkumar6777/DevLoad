@@ -56,7 +56,7 @@ jobs:
                       docker pull ${{ secrets.DOCKER_USERNAME }}/devload-app-frontend:latest
                       docker stop devload-app-frontend || true
                       docker rm devload-app-frontend || true
-                      docker run -d --name devload-app-frontend \
+                      docker run -d --name appdevload \
                       --restart always \
                       -p 127.0.0.1:3001:80 \
                       -e VITE_RAZORPAY_KEY_ID="${{ secrets.VITE_RAZORPAY_KEY_ID }}" \
