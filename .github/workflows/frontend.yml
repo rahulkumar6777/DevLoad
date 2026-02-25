@@ -53,4 +53,5 @@ jobs:
             docker rm devload || true
             docker run -d --name devload \
             --restart always \
+            --network cloud \
             -p 127.0.0.1:3000:80 ${{ secrets.DOCKER_USERNAME }}/devload:latest
