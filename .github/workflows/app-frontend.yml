@@ -26,7 +26,7 @@ jobs:
               run: |
                 docker build \
                   --build-arg VITE_RAZORPAY_KEY_ID="${{ secrets.VITE_RAZORPAY_KEY_ID }}" \
-                  -t ${{ secrets.DOCKER_USERNAME }}/devload-app-frontend:latest \
+                  --no-cache -t ${{ secrets.DOCKER_USERNAME }}/devload-app-frontend:latest \
                   ./app-frontend
 
 

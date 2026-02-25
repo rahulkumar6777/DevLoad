@@ -5,8 +5,8 @@ on:
     branches:
       - main
     paths:
-      - 'backend/**'            
-      - '.github/workflows/backend.yml' 
+      - "backend/**"
+      - ".github/workflows/backend.yml"
 
 jobs:
   # ---- Build job ----
@@ -20,10 +20,10 @@ jobs:
       - name: Set up Node (for any pre-build steps if needed)
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/devloadbackend:latest ./backend
+        run: docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/apidevload:latest ./backend
 
       - name: DockerHub login (access token)
         uses: docker/login-action@v2
@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       - name: Push image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/devloadbackend:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/apidevload:latest
 
   # ---- Deploy job ----
   deploy:
@@ -48,13 +48,13 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_ACCESS_TOKEN }}
-            docker pull ${{ secrets.DOCKER_USERNAME }}/devloadbackend:latest
-            docker stop devloadbackend || true
-            docker rm devloadbackend || true
-            docker run -d --name devloadbackend \
+            docker pull ${{ secrets.DOCKER_USERNAME }}/apidevload:latest
+            docker stop apidevload || true
+            docker rm apidevload || true
+            docker run -d --name apidevload \
                 --restart always \
                 -p 127.0.0.1:6700:6700 \
-                --network vaani-net \
+                --network cloud \
                 -e PORT="${{ secrets.PORT }}" \
                 -e MONGO_PRODUCTION_URI="${{ secrets.MONGO_PRODUCTION_URI }}" \
                 -e NODE_ENV="${{ secrets.NODE_ENV }}" \
@@ -77,5 +77,4 @@ jobs:
                 -e EMAIL_USER="${{ secrets.EMAIL_USER }}" \
                 -e REDIS_URL="${{ secrets.REDIS_URL }}" \
                 -e PRiVATE_API_KEY="${{ secrets.PRiVATE_API_KEY }}" \
-                    ${{ secrets.DOCKER_USERNAME }}/devloadbackend:latest
-
+                    ${{ secrets.DOCKER_USERNAME }}/apidevload:latest
