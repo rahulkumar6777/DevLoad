@@ -54,7 +54,9 @@ import { sanitizeRequest } from "./src/middleware/sanitizeMiddleware.js";
 
 // uses on security middlewares
 app.use(hpp())
-app.use(helmet())
+app.use(helmet({
+    contentSecurityPolicy: false,
+}))
 app.use(xssSanitizeRequest)
 app.use(sanitizeRequest)
 
