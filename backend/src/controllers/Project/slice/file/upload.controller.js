@@ -201,21 +201,13 @@ export const uplaodFile = async (req, res) => {
                 ? "https"
                 : "http";
 
-        const publicUrl = `${protocol}://${req.get(
-            "host"
-        )}/public/${project._id}/${req.file.filename}`;
+        const publicUrl = `${protocol}://api-devload.cloudcoderhub.in/public/${project._id}/${req.file.filename}`;
 
-        const deleteUrl = `${protocol}://${req.get(
-            "host"
-        )}/api/v2/devload/file/${req.file.filename}`;
+        const deleteUrl = `${protocol}://api-devload.cloudcoderhub.in/api/v2/devload/file/${req.file.filename}`;
 
-        const fDeleteUr = `${protocol}://${req.get(
-            "host"
-        )}/api/v2/user/file/${req.file.filename}`;
+        const fDeleteUr = `${protocol}://api-devload.cloudcoderhub.in/api/v2/user/file/${req.file.filename}`;
 
-        const downloadeUrl = `${protocol}://${req.get(
-            "host"
-        )}/api/v2/file/${req.file.filename}`;
+        const downloadeUrl = `${protocol}://api-devload.cloudcoderhub.in/api/v2/file/${req.file.filename}`;
 
         const newfile = new Model.File({
             originalfilename: req.file.originalname,
