@@ -20,7 +20,7 @@ jobs:
       - name: Set up Node (for any pre-build steps if needed)
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Build Docker image
         run: docker build --no-cache -t ${{ secrets.DOCKER_USERNAME }}/apidevload:latest ./backend
