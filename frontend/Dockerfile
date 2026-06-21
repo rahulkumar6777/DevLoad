@@ -1,5 +1,5 @@
 
-FROM node:20.19.5 AS build
+FROM node:24 AS build
 
 WORKDIR /app
 
