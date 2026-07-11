@@ -6,7 +6,7 @@ import { monitoringMiddleware } from "./src/middleware/monitering.middleware.js"
 import { privateCors } from "./src/utils/cors.js";
 
 
-// here i import the router paths
+// here i import the router paths  
 import userRoutes from './src/routes/user.routes.js'
 import publicUrlRoutes from './src/routes/publicUrl.routes.js'
 import packageRoutes from './src/routes/package.routes.js'
